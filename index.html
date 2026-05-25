@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AL GHAFIAH — Typing & Translation | Rolla, Sharjah</title>
+<meta name="description" content="AL GHAFIAH — Trusted typing, translation, and document services in Rolla, Sharjah, UAE. 22 years of professional service.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #060a09;
+  --deep: #071210;
+  --emerald-dark: #061713;
+  --emerald: #0b4a3d;
+  --emerald-mid: #0d5a49;
+  --emerald-glow: rgba(11,74,61,0.35);
+  --gold: #d8a93f;
+  --gold-light: #f0c96a;
+  --gold-pale: #fff5c4;
+  --gold-dim: rgba(216,169,63,0.18);
+  --gold-glow: rgba(216,169,63,0.08);
+  --ivory: #f5edd8;
+  --ivory-dim: rgba(245,237,216,0.65);
+  --muted: rgba(245,237,216,0.45);
+  --glass: rgba(6,23,19,0.6);
+  --glass-border: rgba(216,169,63,0.14);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  background: var(--black);
+  color: var(--ivory);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── INTRO OVERLAY ── */
+#intro-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.9s ease;
+}
+#intro-overlay.fade-out { opacity: 0; pointer-events: none; }
+
+.intro-particles {
+  position: absolute; inset: 0; pointer-events: none;
+}
+
+/* Gate panels */
+.gate-wrap {
+  position: absolute; inset: 0; display: flex;
+  pointer-events: none; overflow: hidden;
+}
+.gate-left, .gate-right {
+  width: 50%; height: 100%;
+  background: radial-gradient(ellipse at center, #0c1f1a 0%, #060a09 100%);
+  transition: transform 1.4s cubic-bezier(0.77,0,0.175,1);
+  will-change: transform;
+}
+.gate-left { border-right: 1px solid rgba(216,169,63,0.2); }
+.gate-right { border-left: 1px solid rgba(216,169,63,0.2); }
+.gate-open .gate-left { transform: translateX(-100%); }
+.gate-open .gate-right { transform: translateX(100%); }
+
+/* Golden light beam */
+.gate-light {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 2px; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(216,169,63,0.6), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.gate-open .gate-light { opacity: 1; }
+
+.skip-btn {
+  position: absolute; top: 24px; right: 28px;
+  background: transparent; border: 1px solid rgba(216,169,63,0.3);
+  color: var(--muted); padding: 8px 18px;
+  font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px;
+  cursor: pointer; z-index: 10001;
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+.skip-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+.intro-logo-wrap {
+  position: relative; z-index: 1;
+  opacity: 0; transform: scale(0.88);
+  transition: opacity 0.9s ease 0.3s, transform 0.9s ease 0.3s;
+}
+.gate-open .intro-logo-wrap {
+  opacity: 1; transform: scale(1);
+}
+
+/* ── NAVIGATION ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(16px,4vw,60px);
+  height: 68px;
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  background: rgba(6,10,9,0.72);
+  border-bottom: 1px solid rgba(216,169,63,0.1);
+  transition: background 0.4s;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 11px;
+  text-decoration: none; color: var(--gold);
+  font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700;
+  letter-spacing: 3px;
+}
+.nav-brand-icon {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  border: 1px solid rgba(216,169,63,0.35);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: 15px; font-weight: 900;
+  color: var(--gold);
+}
+.nav-links {
+  display: flex; list-style: none; align-items: center;
+  gap: clamp(6px,1.8vw,26px);
+}
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-family: 'Cinzel', serif; font-size: 10.5px;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  transition: color 0.3s;
+  padding: 4px 0;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 1px; background: var(--gold);
+  transform: scaleX(0); transition: transform 0.3s ease;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--gold); }
+.nav-cta {
+  background: linear-gradient(135deg, rgba(216,169,63,0.18), rgba(216,169,63,0.06)) !important;
+  border: 1px solid rgba(216,169,63,0.35) !important;
+  padding: 7px 18px !important; border-radius: 2px;
+  color: var(--gold) !important;
+}
+.nav-cta:hover { background: rgba(216,169,63,0.22) !important; }
+.nav-cta::after { display: none !important; }
+
+.nav-toggle {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 6px;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--gold); transition: all 0.3s;
+}
+
+/* ── MAIN HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 68px;
+}
+
+/* Atmospheric background layers */
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(11,74,61,0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 50% 55%, rgba(216,169,63,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(6,23,19,0.5) 0%, transparent 70%);
+}
+
+/* Subtle grid lines */
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(216,169,63,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(216,169,63,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 80%);
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  gap: 0;
+  padding: 20px 24px 40px;
+}
+
+/* Logo */
+.hero-logo-wrap {
+  width: clamp(260px,42vw,500px);
+  margin-bottom: 32px;
+  animation: float-logo 5s ease-in-out infinite;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.hero-logo-wrap.visible {
+  opacity: 1; transform: translateY(0);
+}
+@keyframes float-logo {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Company name */
+.hero-name {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.6rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: clamp(0.15em, 1.5vw, 0.35em);
+  color: var(--gold);
+  text-shadow: 0 0 60px rgba(216,169,63,0.3), 0 2px 4px rgba(0,0,0,0.5);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
+}
+.hero-name.visible { opacity: 1; transform: translateY(0); }
+
+/* Divider line */
+.hero-divider {
+  display: flex; align-items: center; gap: 16px;
+  margin: 18px 0 14px;
+  opacity: 0; transition: opacity 0.9s ease 0.35s;
+}
+.hero-divider.visible { opacity: 1; }
+.hero-divider-line {
+  width: clamp(40px,8vw,90px); height: 1px;
+  background: linear-gradient(to right, transparent, rgba(216,169,63,0.5));
+}
+.hero-divider-line:last-child {
+  background: linear-gradient(to left, transparent, rgba(216,169,63,0.5));
+}
+.hero-divider-gem {
+  width: 5px; height: 5px;
+  background: var(--gold); transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(216,169,63,0.6);
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.72rem, 2vw, 0.95rem);
+  font-weight: 400;
+  letter-spacing: clamp(0.2em, 2vw, 0.5em);
+  color: var(--ivory-dim);
+  text-transform: uppercase;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.9s ease 0.45s, transform 0.9s ease 0.45s;
+}
+.hero-subtitle.visible { opacity: 1; transform: translateY(0); }
+
+/* Arabic text */
+.hero-arabic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: rgba(216,169,63,0.4);
+  margin-top: 22px;
+  letter-spacing: 0.05em;
+  opacity: 0; transition: opacity 0.9s ease 0.6s;
+}
+.hero-arabic.visible { opacity: 1; }
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  opacity: 0; transition: opacity 0.9s ease 1.2s;
+}
+.scroll-hint.visible { opacity: 1; }
+.scroll-hint span {
+  font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px;
+  color: rgba(216,169,63,0.3); text-transform: uppercase;
+}
+.scroll-dot {
+  width: 1px; height: 28px;
+  background: linear-gradient(to bottom, rgba(216,169,63,0.5), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%,100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+/* Particles canvas */
+#particles {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+}
+
+/* ── FOOTER ── */
+.footer {
+  position: relative; z-index: 2;
+  border-top: 1px solid rgba(216,169,63,0.1);
+  background: rgba(6,10,9,0.9);
+  padding: 28px clamp(16px,5vw,80px);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+  max-width: 1200px; margin: 0 auto 24px;
+}
+.footer-brand-name {
+  font-family: 'Cinzel', serif; font-size: 14px; font-weight: 700;
+  letter-spacing: 4px; color: var(--gold); margin-bottom: 4px;
+}
+.footer-brand-sub {
+  font-family: 'Cinzel', serif; font-size: 9px;
+  letter-spacing: 2.5px; color: var(--muted); margin-bottom: 12px;
+}
+.footer-brand-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.footer-col h4 {
+  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 2.5px;
+  color: var(--gold); margin-bottom: 14px; text-transform: uppercase;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col ul li a {
+  color: var(--muted); text-decoration: none; font-size: 13px;
+  transition: color 0.3s;
+}
+.footer-col ul li a:hover { color: var(--gold); }
+.footer-bottom {
+  border-top: 1px solid rgba(216,169,63,0.08);
+  padding-top: 18px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  max-width: 1200px; margin: 0 auto;
+  font-size: 12px; color: rgba(245,237,216,0.25);
+  font-family: 'Cinzel', serif; letter-spacing: 1px;
+}
+
+/* ── CHATBOT ── */
+.chat-orb {
+  position: fixed; bottom: 28px; right: 28px; z-index: 500;
+  width: 54px; height: 54px; border-radius: 50%;
+  background: radial-gradient(135deg, var(--emerald), var(--emerald-dark));
+  border: 1px solid rgba(216,169,63,0.35);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; cursor: pointer;
+  box-shadow: 0 4px 24px rgba(11,74,61,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.chat-orb:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(216,169,63,0.2); }
+
+.chat-panel {
+  position: fixed; bottom: 92px; right: 24px; z-index: 500;
+  width: 340px; max-height: 480px;
+  background: rgba(8,18,16,0.97);
+  border: 1px solid rgba(216,169,63,0.2);
+  border-radius: 10px;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.9) translateY(16px);
+  opacity: 0; pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  backdrop-filter: blur(20px);
+}
+.chat-panel.open {
+  transform: scale(1) translateY(0);
+  opacity: 1; pointer-events: all;
+}
+.chat-header {
+  padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid rgba(216,169,63,0.12);
+  background: rgba(11,74,61,0.25);
+}
+.chat-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--emerald-dark); border: 1px solid rgba(216,169,63,0.3);
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.chat-title { font-family: 'Cinzel', serif; font-size: 12px; color: var(--gold); letter-spacing: 1px; }
+.chat-status { font-size: 11px; color: var(--muted); }
+.chat-close {
+  margin-left: auto; background: none; border: none;
+  color: var(--muted); cursor: pointer; font-size: 14px; padding: 2px 6px;
+  transition: color 0.2s;
+}
+.chat-close:hover { color: var(--gold); }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+  font-size: 13.5px; line-height: 1.55;
+}
+.chat-messages::-webkit-scrollbar { width: 3px; }
+.chat-messages::-webkit-scrollbar-thumb { background: rgba(216,169,63,0.3); border-radius: 2px; }
+.msg { padding: 9px 13px; border-radius: 6px; max-width: 85%; }
+.msg-bot { background: rgba(11,74,61,0.35); color: var(--ivory); align-self: flex-start; }
+.msg-user { background: rgba(216,169,63,0.15); color: var(--gold); align-self: flex-end; }
+.chat-quick { padding: 8px 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.quick-chip {
+  background: none; border: 1px solid rgba(216,169,63,0.25);
+  color: var(--muted); padding: 4px 10px; border-radius: 20px;
+  font-size: 11.5px; cursor: pointer; transition: all 0.2s;
+  font-family: 'Cinzel', serif; letter-spacing: 0.5px;
+}
+.quick-chip:hover { border-color: var(--gold); color: var(--gold); }
+.chat-input-row {
+  display: flex; border-top: 1px solid rgba(216,169,63,0.12);
+  padding: 10px 12px; gap: 8px;
+}
+.chat-input {
+  flex: 1; background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(216,169,63,0.18); border-radius: 4px;
+  padding: 8px 12px; color: var(--ivory);
+  font-family: 'Cormorant Garamond', serif; font-size: 14px;
+  outline: none; transition: border-color 0.2s;
+}
+.chat-input:focus { border-color: rgba(216,169,63,0.4); }
+.chat-input::placeholder { color: rgba(245,237,216,0.25); }
+.chat-send {
+  background: var(--emerald); border: 1px solid rgba(216,169,63,0.3);
+  color: var(--gold); border-radius: 4px; padding: 8px 14px;
+  cursor: pointer; font-size: 14px; transition: background 0.2s;
+}
+.chat-send:hover { background: var(--emerald-mid); }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; flex-direction: column; gap: 0; }
+  .nav-links.open {
+    display: flex; position: fixed; top: 68px; left: 0; right: 0;
+    background: rgba(6,10,9,0.97); border-bottom: 1px solid rgba(216,169,63,0.15);
+    padding: 16px 0; z-index: 999;
+  }
+  .nav-links.open li a {
+    display: block; padding: 12px 28px;
+    font-size: 11px;
+  }
+  .nav-toggle { display: flex; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .chat-panel { width: calc(100vw - 32px); right: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── INTRO OVERLAY ── -->
+<div id="intro-overlay">
+  <canvas class="intro-particles" id="intro-canvas"></canvas>
+  <button class="skip-btn" id="skip-intro">Skip  ✕</button>
+
+  <div class="gate-wrap" id="gate">
+    <div class="gate-left"></div>
+    <div class="gate-light"></div>
+    <div class="gate-right"></div>
+  </div>
+
+  <div class="intro-logo-wrap" id="intro-logo">
+    <!-- LOGO: Luxury envelope opening, document emerging -->
+    <svg viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto" id="intro-svg">
+      <defs>
+        <linearGradient id="goldG" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fff5c4"/>
+          <stop offset="45%" stop-color="#d8a93f"/>
+          <stop offset="100%" stop-color="#8a6820"/>
+        </linearGradient>
+        <linearGradient id="goldG2" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#8a6820"/>
+          <stop offset="50%" stop-color="#d8a93f"/>
+          <stop offset="100%" stop-color="#fff5c4"/>
+        </linearGradient>
+        <linearGradient id="emerG" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#0e5545"/>
+          <stop offset="100%" stop-color="#061713"/>
+        </linearGradient>
+        <linearGradient id="docG" x1="0%" y1="0%" x2="5%" y2="100%">
+          <stop offset="0%" stop-color="#f8f4eb"/>
+          <stop offset="100%" stop-color="#ede4cf"/>
+        </linearGradient>
+        <linearGradient id="envFlapG" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#0e4a3b"/>
+          <stop offset="100%" stop-color="#071713"/>
+        </linearGradient>
+        <linearGradient id="stampG" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(216,169,63,0.25)"/>
+          <stop offset="100%" stop-color="rgba(138,104,32,0.15)"/>
+        </linearGradient>
+        <filter id="glow1">
+          <feGaussianBlur stdDeviation="5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="softShadow">
+          <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/>
+        </filter>
+        <filter id="docShadow">
+          <feDropShadow dx="3" dy="6" stdDeviation="10" flood-color="rgba(0,0,0,0.45)" flood-opacity="1"/>
+        </filter>
+        <clipPath id="envClip">
+          <rect x="60" y="260" width="380" height="220" rx="6"/>
+        </clipPath>
+      </defs>
+
+      <!-- Outer glow ring -->
+      <circle cx="250" cy="270" r="210" fill="none" stroke="rgba(216,169,63,0.07)" stroke-width="1"/>
+      <circle cx="250" cy="270" r="195" fill="none" stroke="rgba(216,169,63,0.05)" stroke-width="0.5"/>
+
+      <!-- ── ENVELOPE BODY ── -->
+      <rect x="60" y="280" width="380" height="210" rx="6"
+            fill="url(#emerG)" stroke="url(#goldG)" stroke-width="1.5"
+            filter="url(#softShadow)"/>
+
+      <!-- Envelope inner shadow lines -->
+      <line x1="60" y1="350" x2="250" y2="430" stroke="rgba(216,169,63,0.08)" stroke-width="0.5"/>
+      <line x1="440" y1="350" x2="250" y2="430" stroke="rgba(216,169,63,0.08)" stroke-width="0.5"/>
+
+      <!-- Envelope bottom-left / bottom-right fold lines -->
+      <polygon points="60,490 250,420 440,490" fill="rgba(8,30,25,0.4)" stroke="rgba(216,169,63,0.12)" stroke-width="0.5"/>
+
+      <!-- Envelope flap (open – rotated back) -->
+      <g id="env-flap" style="transform-origin:250px 280px; transform:rotateX(-40deg)">
+        <polygon points="60,280 250,380 440,280"
+                 fill="url(#envFlapG)" stroke="url(#goldG)" stroke-width="1.2" opacity="0.9"/>
+        <!-- Wax seal on flap -->
+        <circle cx="250" cy="306" r="18" fill="rgba(11,74,61,0.9)" stroke="url(#goldG)" stroke-width="1.2"/>
+        <text x="250" y="311" text-anchor="middle" font-family="Cinzel,serif" font-size="14" font-weight="900" fill="url(#goldG)">A</text>
+      </g>
+
+      <!-- ── DOCUMENT (white paper emerging) ── -->
+      <g id="document" style="transform:translateY(0)" filter="url(#docShadow)">
+        <!-- Paper body -->
+        <rect x="140" y="60" width="220" height="300" rx="5"
+              fill="url(#docG)" stroke="rgba(216,169,63,0.35)" stroke-width="1.2"/>
+
+        <!-- Dog-ear fold top-right -->
+        <polygon points="320,60 360,60 360,100 320,60" fill="rgba(200,185,150,0.5)" stroke="rgba(216,169,63,0.25)" stroke-width="0.8"/>
+        <polygon points="320,60 360,100 320,100" fill="rgba(220,205,170,0.7)"/>
+
+        <!-- Decorative top border line -->
+        <rect x="155" y="78" width="150" height="1" fill="rgba(216,169,63,0.5)"/>
+        <rect x="155" y="82" width="150" height="0.5" fill="rgba(216,169,63,0.2)"/>
+
+        <!-- Big A letter — the brand mark -->
+        <text x="250" y="178" text-anchor="middle"
+              font-family="Cinzel,serif" font-size="88" font-weight="900"
+              fill="none" stroke="url(#goldG)" stroke-width="1.5"
+              filter="url(#glow1)" opacity="0.9">A</text>
+        <!-- Filled A slightly behind -->
+        <text x="250" y="178" text-anchor="middle"
+              font-family="Cinzel,serif" font-size="88" font-weight="900"
+              fill="rgba(216,169,63,0.12)">A</text>
+
+        <!-- Company name on document -->
+        <text x="250" y="204" text-anchor="middle"
+              font-family="Cinzel,serif" font-size="11" font-weight="700"
+              fill="#8a6820" letter-spacing="5">AL GHAFIAH</text>
+
+        <!-- Thin rule under name -->
+        <rect x="163" y="210" width="174" height="0.8" fill="rgba(138,104,32,0.4)"/>
+
+        <!-- Stamp box -->
+        <rect x="160" y="218" width="180" height="38" rx="3"
+              fill="url(#stampG)" stroke="rgba(216,169,63,0.4)" stroke-width="0.8"
+              stroke-dasharray="3,2"/>
+        <text x="250" y="233" text-anchor="middle"
+              font-family="Cinzel,serif" font-size="7.5" font-weight="600"
+              fill="rgba(138,104,32,0.8)" letter-spacing="3">TYPING</text>
+        <rect x="210" y="237" width="80" height="0.5" fill="rgba(138,104,32,0.3)"/>
+        <text x="250" y="249" text-anchor="middle"
+              font-family="Cinzel,serif" font-size="7.5" font-weight="600"
+              fill="rgba(138,104,32,0.8)" letter-spacing="3">&amp; TRANSLATION</text>
+
+        <!-- Arabic text -->
+        <text x="250" y="278" text-anchor="middle"
+              font-family="serif" font-size="16"
+              fill="rgba(138,104,32,0.6)">الغافية</text>
+
+        <!-- Mini keyboard icon -->
+        <rect x="196" y="288" width="108" height="18" rx="3"
+              fill="none" stroke="rgba(216,169,63,0.35)" stroke-width="0.7"/>
+        <!-- Keys row 1 -->
+        <rect x="203" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+        <rect x="213" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+        <rect x="223" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+        <rect x="233" y="292" width="24" height="4" rx="1" fill="rgba(138,104,32,0.15)"/>
+        <rect x="260" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+        <rect x="270" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+        <rect x="280" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+        <!-- Keys row 2 (spacebar) -->
+        <rect x="215" y="299" width="70" height="4" rx="1" fill="rgba(138,104,32,0.18)"/>
+
+        <!-- Translation symbols floating -->
+        <text x="165" y="145" font-family="serif" font-size="13" fill="rgba(216,169,63,0.2)" opacity="0.7">α</text>
+        <text x="325" y="120" font-family="serif" font-size="13" fill="rgba(216,169,63,0.2)" opacity="0.7">ع</text>
+        <text x="155" y="255" font-family="serif" font-size="11" fill="rgba(216,169,63,0.15)">文</text>
+        <text x="330" y="250" font-family="serif" font-size="11" fill="rgba(216,169,63,0.15)">ω</text>
+      </g>
+
+      <!-- Ribbon decorative arc -->
+      <path d="M100,486 Q250,510 400,486" stroke="url(#goldG2)" stroke-width="1" fill="none" opacity="0.4"/>
+    </svg>
+  </div>
+</div>
+
+<!-- Ambient particles canvas -->
+<canvas id="particles"></canvas>
+
+<!-- ── NAVIGATION ── -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-brand-icon">A</div>
+    <span>AL GHAFIAH</span>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="testimonials.html">Testimonials</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="support.html">Support</a></li>
+    <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <!-- Main hero logo (same luxury SVG) -->
+    <div class="hero-logo-wrap" id="hero-logo">
+      <svg viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+        <defs>
+          <linearGradient id="hgoldG" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fff5c4"/>
+            <stop offset="45%" stop-color="#d8a93f"/>
+            <stop offset="100%" stop-color="#8a6820"/>
+          </linearGradient>
+          <linearGradient id="hgoldG2" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#8a6820"/>
+            <stop offset="50%" stop-color="#d8a93f"/>
+            <stop offset="100%" stop-color="#fff5c4"/>
+          </linearGradient>
+          <linearGradient id="hemerG" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0e5545"/>
+            <stop offset="100%" stop-color="#061713"/>
+          </linearGradient>
+          <linearGradient id="hdocG" x1="0%" y1="0%" x2="5%" y2="100%">
+            <stop offset="0%" stop-color="#f8f4eb"/>
+            <stop offset="100%" stop-color="#ede4cf"/>
+          </linearGradient>
+          <linearGradient id="henvFlapG" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#0e4a3b"/>
+            <stop offset="100%" stop-color="#071713"/>
+          </linearGradient>
+          <linearGradient id="hstampG" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(216,169,63,0.25)"/>
+            <stop offset="100%" stop-color="rgba(138,104,32,0.15)"/>
+          </linearGradient>
+          <filter id="hglow1">
+            <feGaussianBlur stdDeviation="5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="hsoftShadow">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/>
+          </filter>
+          <filter id="hdocShadow">
+            <feDropShadow dx="3" dy="6" stdDeviation="10" flood-color="rgba(0,0,0,0.45)" flood-opacity="1"/>
+          </filter>
+        </defs>
+        <circle cx="250" cy="270" r="210" fill="none" stroke="rgba(216,169,63,0.07)" stroke-width="1"/>
+        <circle cx="250" cy="270" r="195" fill="none" stroke="rgba(216,169,63,0.04)" stroke-width="0.5"/>
+        <rect x="60" y="280" width="380" height="210" rx="6" fill="url(#hemerG)" stroke="url(#hgoldG)" stroke-width="1.5" filter="url(#hsoftShadow)"/>
+        <line x1="60" y1="350" x2="250" y2="430" stroke="rgba(216,169,63,0.08)" stroke-width="0.5"/>
+        <line x1="440" y1="350" x2="250" y2="430" stroke="rgba(216,169,63,0.08)" stroke-width="0.5"/>
+        <polygon points="60,490 250,420 440,490" fill="rgba(8,30,25,0.4)" stroke="rgba(216,169,63,0.12)" stroke-width="0.5"/>
+        <polygon points="60,280 250,375 440,280" fill="url(#henvFlapG)" stroke="url(#hgoldG)" stroke-width="1.2" opacity="0.85"/>
+        <circle cx="250" cy="304" r="17" fill="rgba(11,74,61,0.9)" stroke="url(#hgoldG)" stroke-width="1.2"/>
+        <text x="250" y="309" text-anchor="middle" font-family="Cinzel,serif" font-size="13" font-weight="900" fill="url(#hgoldG)">A</text>
+        <g filter="url(#hdocShadow)">
+          <rect x="140" y="60" width="220" height="300" rx="5" fill="url(#hdocG)" stroke="rgba(216,169,63,0.35)" stroke-width="1.2"/>
+          <polygon points="320,60 360,60 360,100 320,60" fill="rgba(200,185,150,0.5)" stroke="rgba(216,169,63,0.25)" stroke-width="0.8"/>
+          <polygon points="320,60 360,100 320,100" fill="rgba(220,205,170,0.7)"/>
+          <rect x="155" y="78" width="150" height="1" fill="rgba(216,169,63,0.5)"/>
+          <rect x="155" y="82" width="150" height="0.5" fill="rgba(216,169,63,0.2)"/>
+          <text x="250" y="178" text-anchor="middle" font-family="Cinzel,serif" font-size="88" font-weight="900" fill="none" stroke="url(#hgoldG)" stroke-width="1.5" filter="url(#hglow1)" opacity="0.9">A</text>
+          <text x="250" y="178" text-anchor="middle" font-family="Cinzel,serif" font-size="88" font-weight="900" fill="rgba(216,169,63,0.12)">A</text>
+          <text x="250" y="204" text-anchor="middle" font-family="Cinzel,serif" font-size="11" font-weight="700" fill="#8a6820" letter-spacing="5">AL GHAFIAH</text>
+          <rect x="163" y="210" width="174" height="0.8" fill="rgba(138,104,32,0.4)"/>
+          <rect x="160" y="218" width="180" height="38" rx="3" fill="url(#hstampG)" stroke="rgba(216,169,63,0.4)" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <text x="250" y="233" text-anchor="middle" font-family="Cinzel,serif" font-size="7.5" font-weight="600" fill="rgba(138,104,32,0.8)" letter-spacing="3">TYPING</text>
+          <rect x="210" y="237" width="80" height="0.5" fill="rgba(138,104,32,0.3)"/>
+          <text x="250" y="249" text-anchor="middle" font-family="Cinzel,serif" font-size="7.5" font-weight="600" fill="rgba(138,104,32,0.8)" letter-spacing="3">&amp; TRANSLATION</text>
+          <text x="250" y="278" text-anchor="middle" font-family="serif" font-size="16" fill="rgba(138,104,32,0.6)">الغافية</text>
+          <rect x="196" y="288" width="108" height="18" rx="3" fill="none" stroke="rgba(216,169,63,0.35)" stroke-width="0.7"/>
+          <rect x="203" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+          <rect x="213" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+          <rect x="223" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+          <rect x="233" y="292" width="24" height="4" rx="1" fill="rgba(138,104,32,0.15)"/>
+          <rect x="260" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+          <rect x="270" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+          <rect x="280" y="292" width="7" height="4" rx="1" fill="rgba(138,104,32,0.2)"/>
+          <rect x="215" y="299" width="70" height="4" rx="1" fill="rgba(138,104,32,0.18)"/>
+          <text x="165" y="145" font-family="serif" font-size="13" fill="rgba(216,169,63,0.2)">α</text>
+          <text x="325" y="120" font-family="serif" font-size="13" fill="rgba(216,169,63,0.2)">ع</text>
+          <text x="155" y="255" font-family="serif" font-size="11" fill="rgba(216,169,63,0.15)">文</text>
+          <text x="330" y="250" font-family="serif" font-size="11" fill="rgba(216,169,63,0.15)">ω</text>
+        </g>
+        <path d="M100,486 Q250,510 400,486" stroke="url(#hgoldG2)" stroke-width="1" fill="none" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <h1 class="hero-name" id="hero-name">AL GHAFIAH</h1>
+
+    <div class="hero-divider" id="hero-divider">
+      <div class="hero-divider-line"></div>
+      <div class="hero-divider-gem"></div>
+      <div class="hero-divider-line"></div>
+    </div>
+
+    <p class="hero-subtitle" id="hero-subtitle">Typing &amp; Translation</p>
+
+    <div class="hero-arabic" id="hero-arabic">الغافية</div>
+  </div>
+
+  <div class="scroll-hint" id="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">AL GHAFIAH</div>
+      <div class="footer-brand-sub">Typing &amp; Translation</div>
+      <p class="footer-brand-text">Trusted document services in Rolla, Sharjah, UAE. Founded by MD Rafi. 22 years of professional service.</p>
+      <div style="margin-top:14px;font-size:1.1rem;color:rgba(216,169,63,0.45);font-family:'Cormorant Garamond',serif;font-style:italic">الغافية</div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Gate Pass Typing</a></li>
+        <li><a href="services.html">Arabic Translation</a></li>
+        <li><a href="services.html">Emirates ID</a></li>
+        <li><a href="services.html">Immigration</a></li>
+        <li><a href="services.html">Trade License</a></li>
+        <li><a href="services.html">All Services →</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="https://wa.me/971555533183">📱 055-5533183</a></li>
+        <li><a href="tel:+971554526063">📞 055-4526063</a></li>
+        <li><a href="tel:+971551189290">📞 055-1189290</a></li>
+        <li><a href="mailto:mrfazmi@gmail.com">✉️ mrfazmi@gmail.com</a></li>
+        <li><a href="#">📍 Rolla, Sharjah, UAE</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 AL GHAFIAH Typing &amp; Translation. All rights reserved.</p>
+    <p>Founded by MD Rafi · Rolla, Sharjah, UAE</p>
+  </div>
+</footer>
+
+<!-- ── CHATBOT ── -->
+<div class="chat-orb" id="chat-orb" title="Chat with AL GHAFIAH Assistant">🤖</div>
+<div class="chat-panel" id="chat-panel">
+  <div class="chat-header">
+    <div class="chat-avatar">✨</div>
+    <div class="chat-header-info">
+      <div class="chat-title">AL GHAFIAH Assistant</div>
+      <div class="chat-status">● Online · Ready to help</div>
+    </div>
+    <button class="chat-close" id="chat-close">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="msg msg-bot">Welcome to AL GHAFIAH! How can I assist you today? Ask about our services, location, or book an appointment.</div>
+  </div>
+  <div class="chat-quick" id="chat-quick">
+    <button class="quick-chip" data-msg="What services do you offer?">Services</button>
+    <button class="quick-chip" data-msg="Where are you located?">Location</button>
+    <button class="quick-chip" data-msg="How do I book a Gate Pass?">Gate Pass</button>
+    <button class="quick-chip" data-msg="What are your working hours?">Hours</button>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" class="chat-input" id="chat-input" placeholder="Ask about our services...">
+    <button class="chat-send" id="chat-send">➤</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// PARTICLES
+// ═══════════════════════════════════════════════════════
+(function() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, pts = [], animId;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    canvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:0;';
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 55; i++) {
+    pts.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 1.4 + 0.2,
+      vx: (Math.random() - 0.5) * 0.2,
+      vy: -Math.random() * 0.35 - 0.08,
+      a: Math.random() * 0.45 + 0.1,
+      pulse: Math.random() * Math.PI * 2
+    });
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    const t = Date.now() * 0.001;
+    pts.forEach(p => {
+      p.pulse += 0.02;
+      const alpha = p.a * (0.7 + 0.3 * Math.sin(p.pulse));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(216,169,63,${alpha})`;
+      ctx.fill();
+      p.x += p.vx; p.y += p.vy;
+      if (p.y < -8) { p.y = H + 8; p.x = Math.random() * W; }
+      if (p.x < -8) p.x = W + 8;
+      if (p.x > W + 8) p.x = -8;
+    });
+    animId = requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+// ═══════════════════════════════════════════════════════
+// INTRO PARTICLES
+// ═══════════════════════════════════════════════════════
+(function() {
+  const c = document.getElementById('intro-canvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let W, H, pts = [], animId;
+  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  for (let i = 0; i < 50; i++) {
+    pts.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.5+0.3, vy:-Math.random()*0.5-0.1, vx:(Math.random()-0.5)*0.25, a:Math.random()*0.5+0.1 });
+  }
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p => {
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(216,169,63,${p.a})`; ctx.fill();
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.y<-5){p.y=H+5;p.x=Math.random()*W;}
+    });
+    animId=requestAnimationFrame(draw);
+  }
+  draw();
+  window._stopIntroParticles = () => cancelAnimationFrame(animId);
+})();
+
+// ═══════════════════════════════════════════════════════
+// INTRO SEQUENCE
+// ═══════════════════════════════════════════════════════
+const overlay = document.getElementById('intro-overlay');
+const gate = document.getElementById('gate');
+const introLogo = document.getElementById('intro-logo');
+const skipBtn = document.getElementById('skip-intro');
+
+function startIntro() {
+  // Step 1: brief pause, then open gate
+  setTimeout(() => {
+    gate.classList.add('gate-open');
+    // Reveal logo as gate opens
+    setTimeout(() => { introLogo.style.opacity = '1'; introLogo.style.transform = 'scale(1)'; }, 400);
+  }, 600);
+
+  // Step 2: hold, then fade out overlay
+  setTimeout(() => { dismissIntro(); }, 3400);
+}
+
+function dismissIntro() {
+  overlay.classList.add('fade-out');
+  setTimeout(() => {
+    overlay.remove();
+    if (window._stopIntroParticles) window._stopIntroParticles();
+    revealHero();
+  }, 900);
+}
+
+function revealHero() {
+  const items = ['hero-logo','hero-name','hero-divider','hero-subtitle','hero-arabic','scroll-hint'];
+  items.forEach((id, i) => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('visible');
+    }, i * 130);
+  });
+}
+
+skipBtn.addEventListener('click', dismissIntro);
+startIntro();
+
+// ═══════════════════════════════════════════════════════
+// NAV TOGGLE (mobile)
+// ═══════════════════════════════════════════════════════
+document.getElementById('nav-toggle').addEventListener('click', function() {
+  document.getElementById('nav-links').classList.toggle('open');
+});
+
+// ═══════════════════════════════════════════════════════
+// CHATBOT
+// ═══════════════════════════════════════════════════════
+const orb = document.getElementById('chat-orb');
+const panel = document.getElementById('chat-panel');
+const msgs = document.getElementById('chat-messages');
+const inputEl = document.getElementById('chat-input');
+const sendBtn = document.getElementById('chat-send');
+const closeBtn = document.getElementById('chat-close');
+
+const responses = {
+  'services': 'We offer 19 professional services including Sharjah Ports Gate Pass Typing, Arabic/English/Urdu/Hindi translation, Emirates ID, Immigration Applications, Trade License, and more. Visit our Services page for the full list!',
+  'location': 'We are located in Rolla, Sharjah, UAE — conveniently situated for all your document needs. 📍',
+  'gate pass': 'Gate Pass Typing is our most popular service! We handle all Sharjah Ports Gate Pass applications with precision and speed. WhatsApp us at 055-5533183 to get started.',
+  'hours': 'Please contact us via WhatsApp (055-5533183) or call 055-4526063 for our current working hours.',
+  'book': 'You can book online via our Contact page, WhatsApp us at 055-5533183, or call 055-4526063.',
+  'contact': 'WhatsApp: 055-5533183 | Office: 055-4526063 | Email: mrfazmi@gmail.com',
+  'translation': 'We provide professional translation in Arabic, English, Urdu, and Hindi. Certified and accurate every time.',
+  'emirates id': 'We assist with Emirates ID applications and renewals. Fast, accurate, and hassle-free.',
+};
+
+function getReply(text) {
+  text = text.toLowerCase();
+  for (const [key, val] of Object.entries(responses)) {
+    if (text.includes(key)) return val;
+  }
+  return 'Thank you for reaching out to AL GHAFIAH! For immediate assistance, please WhatsApp us at 055-5533183 or visit our Services page. We\'re here to help!';
+}
+
+function addMsg(text, type) {
+  const div = document.createElement('div');
+  div.className = `msg msg-${type}`;
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function sendMessage() {
+  const text = inputEl.value.trim();
+  if (!text) return;
+  addMsg(text, 'user');
+  inputEl.value = '';
+  setTimeout(() => addMsg(getReply(text), 'bot'), 600);
+}
+
+orb.addEventListener('click', () => panel.classList.toggle('open'));
+closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+sendBtn.addEventListener('click', sendMessage);
+inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
+
+document.querySelectorAll('.quick-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const msg = chip.dataset.msg;
+    addMsg(msg, 'user');
+    setTimeout(() => addMsg(getReply(msg), 'bot'), 500);
+  });
+});
+</script>
+</body>
+</html>
